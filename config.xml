@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="mx.umov.academia.android" version="1.00" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="mx.umov.academia.android" version="1.01" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>UMOV</name>
     <description>
         La App de UMOV, la Universidad en Línea con la plataforma académica más moderna de México.
     </description>
-    <author email="manuel@umov.mx" href="http://academia.umov.mx">
+    <author email="manuel@umov.mx" href="http://motion.umov.mx">
         Universidad en Linea
     </author>
     <content src="index.html" />

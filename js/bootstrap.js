@@ -1,4 +1,4 @@
-var appVersion = '1.00';
+var appVersion = '1.01';
 
 var store = window.localStorage;
 //var domain = 'www.edu-20.com';
@@ -14,7 +14,7 @@ var store = window.localStorage;
 //var domain = 'carroll.medpower.org';
 //var domain = 'ecampus.matrixlms.com';
 //var domain = 'www.cuohde.com';
-var domain = 'academia.umov.mx';
+var domain = 'motion.umov.mx';
 
 var domainProtocol = 'http';
 //var domainProtocol = 'https';
