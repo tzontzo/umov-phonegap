@@ -241,6 +241,9 @@ var app = {
         //console.log("Page history: "+pageHistory);
     },
     receiveExternalMessage: function(data, origin) {
+        $('#splashScreen').fadeOut(700);
+        $('#infoBar, #contentFrame').fadeIn(700);
+        $('body').css('background', '#FFF');
         switch (data.method) {
             case 'toggleLoader':
                 if (data.action == 'start') {
@@ -427,7 +430,7 @@ var app = {
                     console.log('opening ' + data.href);
                     if (typeof data.refresh_on_close != 'undefined') {
                         newWindow.addEventListener('loadstop', function(event) {
-                            if (event.url.match(schoolDomain)) {
+                            if (event.url.startsWith(schoolProtocol + '://' + schoolDomain)) {
                                 newWindow.close();
                                 var contentFrame = document.getElementById('contentFrame');
                                 contentFrame.contentWindow.location = contentFrame.contentWindow.location.href + '&sso_native_apps_alert=false';
