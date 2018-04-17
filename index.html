@@ -57,16 +57,16 @@
         <title>neo LMS</title>
     </head>
     <body class="left-nav new-left-nav flat tablet-nav new_ui">
-     <div id="splashScreen"></div>
+    <div id="splashScreen"></div>
         <div id="mobileAppWrapper">
             <header></header>
             <div id="courseToolbar"></div>
             <nav role="navigation" id="leftColumn">
                 <ol class="thinMainNav"></ol>
             </nav>
-            <iframe src="blank.html" frameborder="0" id="contentFrame" name="contentFrame" onload="try { app.loadComplete(); } catch (err) { document.getElementById('alertBlock').innerHTML = err.message; }"></iframe>
+            <iframe src="blank.html" frameborder="0" id="contentFrame" name="contentFrame" onload="try { app.loadComplete(); } catch (err) { document.getElementById('alertBlock').innerHTML = err.message; }" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
             <div id="infoBar" role="navigation">
-                <p id="versionBlock">1.02</p>
+                <p id="versionBlock">1.00</p>
                 <p class="alert" id="alertBlock">Loading...</p>
                 <a href="javascript:app.reloadPage();" class="loaderBlock" id="loaderBlock"></a>
                 <a href="javascript:app.goHome();" class="homeButton" id="homeButton"><i class="home inverted"></i></a>

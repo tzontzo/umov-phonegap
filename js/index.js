@@ -181,7 +181,6 @@ var app = {
     loadingStart: function() {
         app.updateStatusMessage('');
         isPageLoaded = false;
-
         if (app.checkConnection()) {
             //connectionTimeout = setTimeout(app.checkTimeout,connectionTimeoutSeconds*1000);
             app.toggleLoader(true);
@@ -237,6 +236,7 @@ var app = {
             closeThinNav();
         }
         app.enableRefreshHeader();
+        //$('#splashScreen').hide();
         //if(!$('header').is(':visible'))
         //console.log("Page history: "+pageHistory);
     },
@@ -728,7 +728,7 @@ var app = {
         }
         canLoadNotification = true;
         setTimeout(function(){
-        	canLoadNotification = false;
+            canLoadNotification = false;
         }, 1000);
     },
     onPause: function() {
@@ -853,7 +853,7 @@ var app = {
             $('nav#user-menu').trigger('open.mm');
         });
         $('header *').click(function(){
-        	app.disableRefreshHeader();
+            app.disableRefreshHeader();
         });
     },
     refreshLeftNav: function() {
@@ -909,63 +909,63 @@ var app = {
         $('#contentFrame').attr('src', schoolProtocol + '://' + schoolDomain + '/');
     },
     registerNotifications: function() {
-    	if (navigator.userAgent.match(/Android/i)) {
-    		var options = {
-    			android: {
-					senderID: androidSenderID,
-					clearBadge: true
-				}
-    		};
-    	} else {
-    		var options = {
-				ios: {
-					alert: true,
-					badge: true,
-					sound: true,
-					clearBadge: true
-				}
-    		};
-    	}
-		
-		var push = PushNotification.init(options);
-		
+        if (navigator.userAgent.match(/Android/i)) {
+            var options = {
+                android: {
+                    senderID: androidSenderID,
+                    clearBadge: true
+                }
+            };
+        } else {
+            var options = {
+                ios: {
+                    alert: true,
+                    badge: true,
+                    sound: true,
+                    clearBadge: true
+                }
+            };
+        }
+        
+        var push = PushNotification.init(options);
+        
         var pushToken = store.getItem('pushToken');
         if (pushToken) {
             app.storeToken(pushToken);
         } else {
             try {
-				push.on('registration', function(data) {
-					store.setItem('pushToken', data.registrationId);
+                push.on('registration', function(data) {
+                    store.setItem('pushToken', data.registrationId);
                     app.storeToken(data.registrationId);
-				});
+                });
             } catch (err) {
                 console.log("Error: " + err.message);
             }
         }
         
         push.on('notification', app.onNativeNotification);
-		push.on('error', function(e) {
-			console.log("Push plugin error" + e.message);
-		});
+        push.on('error', function(e) {
+            console.log("Push plugin error" + e.message);
+        });
     },
     onNativeNotification: function(data) {
-    	if(canLoadNotification){
-    		var item_id = /\(ID: ([0-9]*)\)$/.exec(data.message);
-			var currentSchool = store.getItem('currentSchool');
-			console.log('is alert, item_id: ' + JSON.stringify(item_id));
-			if (data.message.charAt(0) == 'M') {
-				console.log('loading: ' + currentSchool.replace('?mobile_app=true', 'inbox/show?message=' + item_id[1]));
-				app.toggleLoader(true);
-				app.updateStatusMessage('Loading message...');
-				$('#contentFrame').attr('src', currentSchool.replace('?mobile_app=true', 'inbox/show?message=' + item_id[1]));
-			} else {
-				console.log('loading: ' + currentSchool.replace('?mobile_app=true', 'notifications/show?notification=' + item_id[1]));
-				app.toggleLoader(true);
-				app.updateStatusMessage('Loading notification...');
-				$('#contentFrame').attr('src', currentSchool.replace('?mobile_app=true', 'notifications/show?notification=' + item_id[1]));
-			}
-			canLoadNotification = false;
-    	}
+        if(canLoadNotification){
+            var item_id = /\(ID: ([0-9]*)\)$/.exec(data.message);
+            var currentSchool = store.getItem('currentSchool');
+            console.log('is alert, item_id: ' + JSON.stringify(item_id));
+            if (data.message.charAt(0) == 'M') {
+                console.log('loading: ' + currentSchool.replace('?mobile_app=true', 'inbox/show?message=' + item_id[1]));
+                app.toggleLoader(true);
+                app.updateStatusMessage('Loading message...');
+                $('#contentFrame').attr('src', currentSchool.replace('?mobile_app=true', 'inbox/show?message=' + item_id[1]));
+            } else {
+                console.log('loading: ' + currentSchool.replace('?mobile_app=true', 'notifications/show?notification=' + item_id[1]));
+                app.toggleLoader(true);
+                app.updateStatusMessage('Loading notification...');
+                $('#contentFrame').attr('src', currentSchool.replace('?mobile_app=true', 'notifications/show?notification=' + item_id[1]));
+            }
+            canLoadNotification = false;
+        }
     },
     storeLoginCredentials: function(fileSystem) {
         console.log('storeLoginCredentials');
@@ -1101,12 +1101,12 @@ var app = {
         writer.write("");
     },
     disableRefreshHeader: function() {
-    	console.log('disable refresh header');
-    	canRefreshHeader = false;
+        console.log('disable refresh header');
+        canRefreshHeader = false;
     },
     enableRefreshHeader: function() {
-    	console.log('enable refresh header');
-    	canRefreshHeader = true;
+        console.log('enable refresh header');
+        canRefreshHeader = true;
     }
 };
 
@@ -1477,7 +1477,7 @@ $(document).ready(function() {
 
     $('body, #contentFrame, #loadingOverlay').css({
         width: $(window).width(),
-        height: $(window).height() - (navigator.userAgent.match(/Android/i) ? 10 : 20)
+        height: $(window).height() - (navigator.userAgent.match(/Android/i) ? 0 : 20)
     });
     $('header').css('width', $(window).width());
 
@@ -1489,6 +1489,6 @@ $(document).ready(function() {
         $('.editorContainer').hide();
         editor.destroy();
     });
-
+    
     var globalWindowHeight = $(window).height();
 });
